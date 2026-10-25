@@ -1,0 +1,155 @@
+{
+  "paper": "paper/updated-CLQ.zip",
+  "paper_version": "v7.0 short preprint, October 23, 2026",
+  "record_semantics": "A disclosed subset of completed experiments; retained observations are unchanged. Release documentation is not a new preregistration.",
+  "input_policy": "Replay the shipped frozen INPUTS and CONFIG files. Historical input-generation campaigns are outside this release.",
+  "rounds": {
+    "2026-10-12-ouro-advisor-stagecd": {
+      "section": "3–4, 6; Tables 2, 5, 7",
+      "runner": "lib.ouro_advisor_stagecd",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Native one-hop/two-hop gate; Q, K and V freezes with matched-size controls; same-example and shuffled late-query rescue at loop 1 and loop 2. Original bootstrap seed and Bonferroni-4 rescue intervals are retained."
+    },
+    "2026-10-12-ouro-rescue-audit": {
+      "section": "4",
+      "runner": "lib.ouro_rescue_audit",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Saved operand-isolation diagnostics and the replication on 300 new Ouro-2.6B scenes. Final-position query patches keep all other positions unchanged. The archived factor controls use the original same-scene inputs."
+    },
+    "2026-10-12-ouro-rescue-controls": {
+      "section": "4, 6; Table 5",
+      "runner": "lib.ouro_rescue_controls",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Same-item all-layer query replication and V_F / KV_F / KV_memory co-freezes. The primary KV_F minus V_F contrast retains the original Bonferroni-2 correction."
+    },
+    "2026-10-12-ouro-stage-e-swap": {
+      "section": "5; Table 3",
+      "runner": "lib.ouro_stage_e",
+      "action": "run",
+      "model_argument": true,
+      "scope": "All-head crossed query swaps at recipient loops 1 and 3. Recipient and donor ask about the same person with different bridge boxes. Recipient answer, donor bridge, donor answer and donor line predictions differ on every scene."
+    },
+    "2026-10-12-ouro-converse-kv": {
+      "section": "5.1; Table 4",
+      "runner": "lib.ouro_converse_kv",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Compare late Q with late K, V and KV at the used facts, and late KV at all positions except the final query. Same-item and shuffled-donor controls and the original primary Bonferroni-2 interval are retained."
+    },
+    "2026-10-12-ouro-template-transfer": {
+      "section": "8",
+      "runner": "lib.ouro_template_transfer",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Native gates and all-head same/shuffled rescue on V1_order_distract, V2_new_surface and V3_both, including the failed 1.4B gates. Rescue on failed-gate cells is descriptive."
+    },
+    "2026-10-12-ouro-natural-kv-fc": {
+      "section": "7",
+      "runner": "lib.ouro_natural_kv_fc",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Natural four-candidate Q/K/V freezes against the bridge-given question. Q freezes the question span; K/V freeze the fact span. Composition selectivity remains near zero."
+    },
+    "2026-10-12-ouro26-natural-rescue-fc-powered": {
+      "section": "7",
+      "runner": "lib.ouro_natural_rescue_fc2",
+      "action": "run",
+      "model_argument": false,
+      "scope": "The frozen 1,105-item natural QA set, candidate ranking, target screen, same-item query, shuffled donor and same-loop donor. Gold answer is candidate zero; candidates use length-normalized log-likelihood."
+    },
+    "2026-10-15-dense-control": {
+      "section": "4",
+      "runner": "lib.dense_control",
+      "action": "campaign",
+      "model_argument": false,
+      "scope": "Qwen3-1.7B-Base depth-offset control. Retain all specified exits and offsets, same/shuffled queries and the inconclusive 10-point bound."
+    },
+    "2026-10-15-ouro-format-transfer": {
+      "section": "8",
+      "runner": "lib.ouro_format_transfer",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Gate and all-head rescue for lockers, rooms, cars and story formats. Donor prompts have the same token length."
+    },
+    "2026-10-15-ouro-entity-scale": {
+      "section": "8",
+      "runner": "lib.ouro_entity_scale",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Gate and all-head rescue on 8- and 16-entity scenes. Keep the failed 1.4B 16-entity gate. Scoring uses the corresponding number of candidates."
+    },
+    "2026-10-15-ouro14-rescue-replication": {
+      "section": "4",
+      "runner": "lib.ouro_rescue_replication",
+      "action": "run",
+      "model_argument": false,
+      "scope": "All-head query rescue on the 400 frozen host scenes. Targets are wrong at loop 1 and right at loop 3. The published replication is 81.8% of 170 targets."
+    },
+    "2026-10-16-format-scale": {
+      "section": "8",
+      "runner": "lib.ouro_format_scale",
+      "action": "run",
+      "model_argument": true,
+      "scope": "Four formats at 8/16 entities. Preserve all native gates, the 1.4B failed gates, and the same/shuffled rescue in eligible cells."
+    },
+    "2026-10-16-freegen-rescue": {
+      "section": "4",
+      "runner": "lib.freegen_rescue",
+      "action": "campaign",
+      "model_argument": true,
+      "scope": "Greedy generation scored from the first alphabetic word under the original rule. Preserve the 1.4B zero-color output and zero rescue, and the 2.6B positive rescue."
+    },
+    "2026-10-16-layerskip8b-control": {
+      "section": "4",
+      "runner": "lib.layerskip8b_control",
+      "action": "campaign",
+      "model_argument": false,
+      "scope": "LayerSkip-Llama3-8B depth-offset rescue control, including the exit-16 primary contrast. This control does not isolate recurrence as the cause of rescue."
+    },
+    "2026-10-17-matched-composition-control": {
+      "section": "6",
+      "runner": "lib.matched_composition",
+      "action": "campaign",
+      "model_argument": true,
+      "scope": "Equal-length two-hop and bridge-given questions on the same facts. The query-freeze loss difference M retains the original paired Bonferroni-2 intervals."
+    },
+    "2026-10-17-matched-control-per-line": {
+      "section": "6",
+      "runner": "lib.matched_per_line",
+      "action": "campaign",
+      "model_argument": true,
+      "scope": "Freeze the person-to-box and box-to-color lines separately. Retain the shared-line comparison and the limitation that the bridge-given question does not read the person-to-box line."
+    },
+    "2026-10-17-nl-band-control": {
+      "section": "7",
+      "runner": "lib.nl_band_control",
+      "action": "run",
+      "model_argument": false,
+      "scope": "All heads in the last quarter of Ouro-2.6B layers, with the original shuffled donor and an independent donor map. Keep the strong shuffled-donor baseline."
+    },
+    "2026-10-17-nl-crossover": {
+      "section": "7",
+      "runner": "lib.nl_crossover",
+      "action": "campaign",
+      "model_argument": false,
+      "scope": "Ouro-2.6B natural crossed swap on the original edited passages. Keep all-layer and last-quarter all-head arms, unrelated-donor controls, the paired gate and the unsupported primary redirection contrast."
+    },
+    "2026-10-17-nl-fresh-replication": {
+      "section": "7",
+      "runner": "lib.nl_fresh_replication",
+      "action": "campaign",
+      "model_argument": false,
+      "scope": "The independent 646-item 2Wiki replication. Retain source/QA/evidence/hop exclusions, all-layer and last-quarter all-head rescue with paired shuffled controls."
+    },
+    "2026-10-17-nl-ouro14-boundary": {
+      "section": "7",
+      "runner": "lib.nl_ouro14_boundary",
+      "action": "run",
+      "model_argument": false,
+      "scope": "Ouro-1.4B on the same 1,105 items: native loop gain, all-layer same/shuffled query rescue, identity diagnostics and the null rescue result."
+    }
+  }
+}

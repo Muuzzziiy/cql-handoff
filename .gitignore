@@ -1,0 +1,15 @@
+models/
+data/sources/
+data/runtime/
+experiments/**/*.json
+experiments/**/*.jsonl
+experiments/**/*.log
+experiments/*/shipped_results/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.token
+.DS_Store
+Thumbs.db
