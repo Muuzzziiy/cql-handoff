@@ -10,6 +10,8 @@ The archive contains:
 
 These paths are members of the ZIP archive, not standalone files in this repository.
 
+`figures/query-rescue.png` is a PNG rendering of Figure 1 from the bundled manuscript, displayed in the repository's main README. It remains subject to the manuscript's copyright and publication terms described below.
+
 See the [preprint clarifications](../PREPRINT_NOTES.md) for the natural-QA donor and position-alignment procedure, a small numerical display correction, and replication-interval annotations. The current archive incorporates these method and presentation clarifications in both the manuscript PDF and LaTeX source.
 
 ## Copyright and licensing

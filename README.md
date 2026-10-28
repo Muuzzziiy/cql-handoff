@@ -2,13 +2,35 @@
 
 **Ziyu Mu and Zehua Wang**
 
-This repository is the official code and reproducibility release accompanying the October 2026 preprint. It includes the research code and frozen experiment records.
+[arXiv](https://arxiv.org/abs/2610.34639) | [Read the paper (PDF)](https://arxiv.org/pdf/2610.34639) | [CPU quick start](#quick-start-cpu-only) | [Run model experiments](#replaying-a-round) | [Paper sources (ZIP)](paper/updated-CLQ.zip)
 
-[Paper materials (ZIP)](paper/updated-CLQ.zip) | [Preprint clarifications](PREPRINT_NOTES.md) | [Research code](lib/) | [Reproducibility instructions](#setup) | [License](#license)
+This repository is the official code and reproducibility release accompanying the October 2026 preprint. It includes the research code and frozen experiment records.
 
 ## Overview
 
-This release reproduces the short preprint's query handoff, query/key/value controls, crossed swaps, and stated boundaries. On synthetic scenes, the same-example late query rescues 89.8% / 96.9% of the targets in Ouro-1.4B / Ouro-2.6B. The 1.4B effect is a candidate-ranking rescue; its loop-1 free generation remains unsuccessful. On natural QA, rescue is smaller at 2.6B and absent at 1.4B; the crossed swap does not establish redirection.
+**Main finding:** On synthetic two-hop questions, handing loop 3's attention queries back to loop 1 rescues **89.8% of targets in Ouro-1.4B and 96.9% in Ouro-2.6B**, versus **23.7% and 20.6%** for shuffled-donor queries. The intervention replaces the final-position query at every layer and head, leaving earlier prompt positions at their loop-1 state. Targets are questions that native loop 1 answers incorrectly and native loop 3 answers correctly; rescue is measured at the loop-1 exit.
+
+![Figure 1: Later-loop queries rescue early-loop two-hop errors, compared with donor controls and late-key/value interventions.](paper/figures/query-rescue.png)
+
+*Figure 1 from the preprint. (a) Query rescue and donor controls. (b) Query versus key/value interventions in a separate converse round. The dashed line marks 25% chance; confidence intervals are reported in Tables 2 and 4 of the paper.*
+
+**Scope:** These headline rates use four-candidate scoring on synthetic scenes. The rescue also holds under greedy generation in Ouro-2.6B; in Ouro-1.4B, loop-1 free generation remains unsuccessful. On natural QA, rescue is smaller at 2.6B and absent at 1.4B; the crossed swap does not establish redirection. This release includes the query handoff, query/key/value controls, crossed swaps, and tests of these boundaries.
+
+## Quick start (CPU only)
+
+Recompute the main synthetic freeze and query-rescue statistics from the released observations, including raw-logit checks, target selection, rescue rates, and bootstrap confidence intervals. Use Python 3.12 and the CPU dependencies:
+
+```bash
+git clone https://github.com/Muuzzziiy/cql-handoff.git
+cd cql-handoff
+python -m pip install -r requirements-cpu.txt
+python scripts/extract_records.py
+python -m lib.ouro_advisor_stagecd_check
+```
+
+The checker prints a JSON result with `"status": "PASS"` when the saved records reproduce the reported statistics. This CPU example uses the shipped model outputs and needs no model weights or dataset downloads. To run new model forward passes, follow [Setup](#setup) and [Replaying a round](#replaying-a-round).
+
+[Research code](lib/) | [Preprint clarifications](PREPRINT_NOTES.md) | [Full verification setup](#setup) | [License](#license)
 
 ## Release scope and evidence
 
